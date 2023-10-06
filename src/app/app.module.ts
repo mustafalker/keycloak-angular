@@ -1,18 +1,48 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
+import { NgModule } from '@angular/core';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { AppComponent } from './app.component';
+import { AnaSayfaComponent } from './ana-sayfa/ana-sayfa.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './router.navigate';
+
+const keycloakService = new KeycloakService();
 
 @NgModule({
   declarations: [
-    AppComponent
+    AnaSayfaComponent,
+    AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    KeycloakAngularModule,
+    AppRoutingModule,
+    NgbModule,
+    RouterModule.forRoot([]), 
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: KeycloakService,
+      useValue: keycloakService,
+    },
+  ],
+  bootstrap: [AppComponent],
+  exports: [RouterModule],
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    keycloakService.init({
+      config: {
+        url: 'http://localhost:8080',
+        realm: 'logreq',
+        clientId: 'logreq',
+      },
+      initOptions: {
+        onLoad: 'login-required',
+      },
+    });
+  }
+}
