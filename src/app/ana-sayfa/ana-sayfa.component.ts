@@ -1,5 +1,3 @@
-// ana-sayfa.component.ts
-
 import { Component } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { Router } from '@angular/router';
@@ -15,7 +13,7 @@ export class AnaSayfaComponent {
 
   logout() {
     this.keycloak.logout().then(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/ana-sayfa']); // Çıkış yapıldığında ana sayfaya yönlendir.
     });
   }
 }

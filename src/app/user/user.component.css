@@ -1,0 +1,17 @@
+.mt-5{
+    margin-top: 500px;
+}
+td {
+    max-width: 70px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    cursor: pointer; 
+  }
+  
+  .expanded {
+    max-width: none; 
+    white-space: normal; 
+    overflow: visible; 
+    text-overflow: clip; 
+  }

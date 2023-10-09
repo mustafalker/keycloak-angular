@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './router.navigate';
+import { UserComponent } from './user/user.component';
 
 const keycloakService = new KeycloakService();
 
@@ -14,14 +15,14 @@ const keycloakService = new KeycloakService();
   declarations: [
     AnaSayfaComponent,
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
     KeycloakAngularModule,
     AppRoutingModule,
     NgbModule,
-    RouterModule.forRoot([]), 
   ],
   providers: [
     {
@@ -30,13 +31,12 @@ const keycloakService = new KeycloakService();
     },
   ],
   bootstrap: [AppComponent],
-  exports: [RouterModule],
 })
 export class AppModule {
   constructor() {
     keycloakService.init({
       config: {
-        url: 'http://localhost:8080',
+        url: 'http://localhost:8080',  
         realm: 'logreq',
         clientId: 'logreq',
       },
